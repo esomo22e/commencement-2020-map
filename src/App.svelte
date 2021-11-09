@@ -1,28 +1,6 @@
 <script>
 	import { onMount } from 'svelte';
 
-	//Correlation
-	import Scatter from './charts/scatter.svelte'
-	import XYHeatmap from './charts/xy-heatmap.svelte'
-
-	//Ranking
-	import BarChart from './charts/bar-chart.svelte'
-	import LollipopChart from './charts/lollipop-chart.svelte'
-	import StackedBar from './charts/stacked-bar-chart.svelte'
-
-	//Change over Time
-	import LineChart from './charts/line-chart.svelte'
-
-	//Distribution
-	import DotPlot from './charts/dot-plot.svelte'
-
-
-	//Part to Whole
-	import WaffleChart from './charts/waffle-chart.svelte'
-	import DonutChart from './charts/donut-chart.svelte'
-	import PieChart from './charts/pie-chart.svelte'
-
-
 	//Maps
 	import MapUSA from './charts/map-usa.svelte'
 
@@ -40,10 +18,15 @@
 	import * as waffledata from '../public/datasets/waffledata.json'
 	import * as testData from '../public/datasets/test.json'
 
+	import * as d3 from 'd3';
+	var data = [30, 86, 168, 281, 303, 365];
+
+	let el;
+
 
 	export let width = Math.min(
 
-		document.getElementById('svelte-app').getBoundingClientRect().width,
+		document.getElementById('svelte-commencement-2021').getBoundingClientRect().width,
 		1100
 	);
 
@@ -58,6 +41,92 @@
 			return "horizontal"
 		}
 	}
+
+	let src_images = "http://news.northeastern.edu/interactive/2021/10/commencement-2021/images/map_northeastern.svg";
+
+	// export let lat;
+	// export let long;
+
+	const markerLocation = [];
+
+
+export const locations = [
+  { id: 1, name: "loc_1", x: 850, y: 707 },
+  {  id: 2,name: "loc_2", x: 200, y: 500},
+  {  id: 3,name: "loc_3", x: 300, y: 550},
+  {  id: 4,name: "loc_4", x:120, y: 700},
+  { id: 5, name: "loc_5", x: 294, y: 286 },
+];
+
+
+
+onMount(() => {
+
+// console.log(graphicElement)
+
+// function getViewport(){
+	let wrapperBounds = document.querySelector('.map-wrapper').getBoundingClientRect();
+	// console.log(wrapperBounds);
+	let graphicBounds = document.querySelector('.map-graphic').getBoundingClientRect();
+   // console.log(graphicBounds)
+
+  let wrapperWidth = wrapperBounds.width;
+  let wrapperHeight = wrapperBounds.height;
+  let wrapperLocation = [wrapperBounds.top, wrapperBounds.left, wrapperBounds.bottom, wrapperBounds.right]
+  // console.log(wrapperWidth)
+  // console.log(wrapperHeight)
+  // console.log(wrapperLocation[0])
+
+  let graphicWidth = graphicBounds.width;
+  let graphicHeight = graphicBounds.height;
+  let graphicOffset = [graphicBounds.x, graphicBounds.y]
+  // console.log(graphicWidth)
+  // console.log(graphicHeight)
+  // console.log("x:" + graphicOffset[0])
+
+
+// }
+// getViewport();
+
+
+});
+
+function navTo(index) {
+	// alert('clicked')
+	console.log("clicked" + (index-1))
+	console.log(locations);
+	console.log(locations.length)
+
+	let location = locations[index -1]
+	console.log(location)
+	let graphicBounds = document.querySelector('.map-graphic').getBoundingClientRect();
+	let wrapperBounds = document.querySelector('.map-wrapper').getBoundingClientRect();
+
+	console.log("x graphics bound:" +graphicBounds.x)
+	console.log("y graphics bound:" +graphicBounds.y)
+
+	console.log("x wrapper height:" +graphicBounds.x)
+	console.log("y wrapper width:" +graphicBounds.y)
+
+	console.log(location.y)
+	console.log(location.x)
+	let mapPoints = document.querySelectorAll('.map-point');
+
+	let mapPointBounds = mapPoints[index - 1].getBoundingClientRect();
+
+	let graphicElement = document.getElementById('graphic');
+	// graphicElement.style.top = location.y + graphicBounds.y+ "px";
+	// graphicElement.style.left = location.x + graphicBounds.x/2 + "px";
+	// graphicElement.style.top =  (wrapperBounds.height/4 +graphicBounds.height/4-location.y) + "px";
+	// graphicElement.style.left = (wrapperBounds.width/4 +graphicBounds.width/4  - location.x) + "px";
+	graphicElement.style.top =  (wrapperBounds.height/2 -mapPointBounds.height/2-location.y) + "px";
+	graphicElement.style.left = (wrapperBounds.width/2 -mapPointBounds.width/2  - location.x) + "px";
+	console.log(graphicElement.style.top);
+	console.log(graphicElement.style.left);
+
+	// locations[3];
+	// locations = locations[index-1];
+}
 </script>
 
 <style>
@@ -69,339 +138,83 @@
 }
 
 main{
-	margin: 0 auto;
+	/* margin: 0 auto;
 	display: block;
 	margin-left: 25%;
-	margin-right: 25%;
+	margin-right: 25%; */
 }
 
-:root {
-        --global--font-impact: trim-poster, sans-serif;
-        --global--font-versatile: harriet, serif;
-        --global--font-signage: akkurat, sans-serif;
-        --global--font-weight-thin: 100;
-        --global--font-weight-extra-light: 200;
-        --global--font-weight-light: 300;
-        --global--font-weight-regular: 400;
-        --global--font-weight-medium: 500;
-        --global--font-weight-semi-bold: 600;
-        --global--font-weight-bold: 700;
-        --global--font-weight-extra-bold: 800;
-        --global--font-weight-black: 900;
-        --global--font-weight-ultra-black: 900;
-        /**
-         * Global font sizes.
-         */
-        --global--font-size-xxs: 12px;
-        --global--font-size-xs: 14px;
-        --global--font-size-s: 15px;
-        --global--font-size-m: 19px;
-        --global--font-size-l: 22px;
-        --global--base-line-height: 1.4;
-        /**
-         * Global brand color palette.
-         */
-        --global--color-brand-dark-blue: #385775;
-        --global--color-brand-white: #fff;
-        /**
-         * Global color palette.
-         */
-        --global--color-black: #000;
-        --global--color-white: #fff;
-        --global--color-red: #d41b2c;
-        --global--color-dark-gray: #222;
-        --global--color-gray: #555;
-        --global--color-light-gray: #99a3b0;
-        --global--color-lighter-gray: #cbcccb;
-        --global--color-lightest-gray: #efefef;
-        --global--color-darkest-blue: #1b3645;
-        --global--color-dark-blue: #385775;
-        --global--color-blue: #006eb5;
-        --global--color-light-blue: #9ebcda;
-        --global--color-lighter-blue: #f7fcfd;
-        --global--color-accent-blue: #52cfe5;
-        --global--color-teal: #00cfb5;
-        --global--color-purple: #6e016b;
-        --global--color-primary: var(--global--color-purple);
-        --global--color-secondary: var(--global--color-lighter-blue);
-        /**
-         * Global Spacing.
-         */
-        --global--spacing-unit: 16px;
-        --global--spacing-vertical: calc(5 * var(--global--spacing-unit));
-        --global--spacing-horizontal: calc(2.5 * var(--global--spacing-unit));
-        --global--spacing-gap: 16px;
-        /**
-         * Global Borders
-         */
-        --global--border-color-light: var(--global--color-lightest-gray);
-        --global--border-color-regular: var(--global--color-lighter-gray);
-        --global--border-color-heavy: var(--global--color-gray);
-        --global--border-weight-regular: 1px;
-        --global--border-radius-tight: 10px;
-        --global--border-radius-regular: 12px;
-        --global--border-radius-loose: 16px;
-        /**
-         * Buttons
-         */
-        --button--primary--base-background: var(--global--color-purple);
-        --button--primary--base-color: var(--global--color-brand-white);
-        --button--secondary--base-background: var(--global--color-dark-blue);
-        --button--secondary--base-color: var(--global--color-brand-white);
-        --button--secondary--border-color: var(--global--color-darkest-blue);
-        /**
-         * Charts
-         */
-        --chart--color-primary: var(--global--color-purple);
-        --chart--color-secondary: var(--global--color-light-blue);
-        --chart--title-font: var(--global--font-signage, inherit);
-        --chart--title-font-size: var(--global--font-size-l);
-        --chart--title-text-align: center;
-        --chart--title-weight: var(--global--font-weight-bold);
-        --chart--title-color: var(--global--color-black);
-        --chart--label-font: var(--global--font-signage, inherit);
-        --chart--label-font-size: var(--global--font-size-l);
-        --chart--label-text-align: center;
-        --chart--label-weight: var(--global--font-weight-bold);
-        --chart--label-color: var(--global--color-black);
-        --chart--key-font: var(--global--font-signage, inherit);
-        --chart--key-font-size: var(--global--font-size-l);
-        --chart--key-text-align: center;
-        --chart--key-weight: var(--global--font-weight-bold);
-        --chart--key-color: var(--global--color-black);
-        --chart--alignment: center;
-        --chart--flex-direction: column;
-        --chart--variants-base: #bfd3e6;
-        --chart--variants-alpha: #8c96c6;
-        --chart--variants-delta: #6e016b;
-        --chart--footnote-font: var(--global--font-signage, inherit);
-        --chart--footnote-font-size: var(--global--font-size-xs);
-        --chart--footnote-weight: var(--global--font-weight-light);
-        --chart--footnote-color: var(--global--color-black);
-        --chart--footnote-line-height: 1.4;
-        --chart--footnote-margin: var(--global--spacing-unit);
-    }
+.map-wrapper{
+	overflow: hidden;
+	position: relative;
+	width: 600px;
+	height: 600px;
+	border: red solid;
+	/* width: 1024px;
+	height:768px; */
+}
 
+.map-graphic{
+	position:absolute;
+	top: 0;
+left: 0;
+	width: 1024px;
+	height: 768px;
+	transition: top 2s ease 0s, left 2s ease 0s
+}
+
+image.commencement-map{
+	width: 1024px;
+	height:768px;
+
+}
+
+
+
+/* .chart :global(div) {
+		font: 10px sans-serif;
+		background-color: steelblue;
+		text-align: right;
+		padding: 3px;
+		margin: 1px;
+		color: white;
+	} */
+	/* svg {
+	  display: block;
+	  width: 100%;
+	} */
 </style>
-<main>
+<!-- <main> -->
 
-<div class = "category-title">Rankings</div>
-<GraphicTitle
-   title={"Stacked Bar Chart"}
-/>
-<StackedBar
-	width={width}
-	height={height}
-	data={testData.default}
-	xVar={"State"}
-	yVar={["2020 Early Votes"]}
-	yGroups={["2016 Total Votes","2020 Early Votes"]}
-	colorscheme={["var(--chart--color-primary)", "var(--chart--color-secondary)"]}
-	orientation={"vertical"}
+<div class = "category-title">Commencement 2021 Map</div>
 
-/>
+<!-- <div bind:this={el} class="chart"></div> -->
 
-<StackedBar
-	width={width}
-	height={500}
-	data={testData.default}
-	xVar={"State"}
-	yVar={["2020 Early Votes"]}
-	yGroups={["2016 Total Votes","2020 Early Votes"]}
-	colorscheme={[ "grey", "red"]}
-	orientation={"horizontal"}
+<!-- <img src =  {src_images} alt = "commencement-map-2021" class = "commencement-map"> -->
+<div class = "map-wrapper">
+<svg class = "map-graphic" id = "graphic"
+  xmlns="http://www.w3.org/2000/svg">
+  <image href={src_images}  class = "commencement-map"/>
+    {#each locations as location}
+  <circle cx="{location.x}" cy="{location.y}" r="20" stroke="black" stroke-width="2" fill="purple" class="map-point" />
 
-/>
-<GraphicTitle
-   title={"Bar Chart"}
-/>
-<BarChart
-	data={testData.default}
-	width={width}
-	height={height}
-	xVar={"State"}
-	yVar={["2016 Total Votes","2020 Early Votes"]}
-	orientation={"vertical"}
-/>
+  {/each}
+  <!-- <circle cx="500" cy="250" r="20" stroke="black" stroke-width="2" fill="purple" />
+  <circle cx="1000" cy="568" r="20" stroke="black" stroke-width="2" fill="purple" />
+  <circle cx="212" cy="294" r="20" stroke="black" stroke-width="2" fill="purple" /> -->
 
-<BarChart
-	data={testData.default}
-	width={width}
-	height={height}
-	xVar={"State"}
-	yVar={["2016 Total Votes","2020 Early Votes"]}
-	orientation={"horizontal"}
-/>
-<GraphicTitle
-   title={"Lollipop Chart"}
-/>
-<LollipopChart
-	data={turnout.default.filter(d => (["Massachusetts", "Rhode Island", "Connecticut", "New Hampshire", "Maine", "Vermont"].indexOf(d["State"]) > -1))}
-	width={width}
-	height={height}
-	xVar={"State"}
-	yVar={"2020 Early Votes"}
-	yDomain={[0, 3500000]}
-/>
-<LollipopChart
-	data={turnout.default.filter(d => (["Massachusetts", "Rhode Island", "Connecticut", "New Hampshire", "Maine", "Vermont"].indexOf(d["State"]) > -1))}
-	width={width}
-	height={height}
-	xVar={"State"}
-	yVar={"2020 Early Votes"}
-	yDomain={[0, 3500000]}
-	orientation={"horizontal"}
-/>
+</svg>
+
+</div>
+<!-- <div class = "location-name" on:click={() => navTo()}>location 2</div> -->
+
+{#each locations as location}
+
+<div class = "location-name" on:click={() => navTo(location.id)}>location {location.id}</div>
+<!-- <div class = "location-name" on:click={() => navTo(2)}>location 2</div> -->
+{/each}
+<!-- <div class = "location-name" on:click={() => navTo(3)}>location 3</div> -->
+<!-- <div class = "location-name" on:click={() => navTo(5)}>location 5</div> -->
 
 
-<div class = "category-title">Correlation</div>
-<Scatter
-	data={turnout.default}
-	width = {width}
-	height = {height}
-	xVar={"2020 Early Votes"}
-	yVar={"2016 Total Votes"}
-/>
-<XYHeatmap
-	data={applemaps.default}
-	width = {width}
-	height = {height}
-	xVar={"date"}
-	yGroups={["driving", "transit", "walking"]}
-	yDomain={[0, 200]}
-/>
-<div class = "category-title">Deviation</div>
-
-<div class = "category-title">Change v Time</div>
-<LineChart
-	data={applemaps.default}
-	width = {width}
-	height = {height}
-	xVar={"date"}
-	yGroups={["driving", "transit", "walking"]}
-	yDomain={[0, 200]}
-/>
-
-<div class = "category-title">Distribution</div>
-<DotPlot
-	data={turnout.default.filter(d => (["Massachusetts", "Rhode Island", "Connecticut", "New Hampshire", "Maine", "Vermont"].indexOf(d["State"]) > -1))}
-	width = {width}
-	height = {height}
-	datapoints={["2020 Early Votes", "2016 Total Votes"]}
-	category={"State"}
-/>
-<div class = "category-title">Parts to Whole</div>
-<GraphicTitle
-   title={"Waffle Chart"}
-/>
-<WaffleChart
-	data={waffledata.default[0]}
-	width = {width}
-	columns={40}
-	groups = {["red","blue","green"]}
-/>
-<GraphicTitle
-   title={"Donut Chart"}
-/>
-<DonutChart
-	width={height}
-	height={height}
-	data={testData.default}
-	xVar={"State"}
-	yVar={"2020 Early Votes"}
-	yA={"2016 Total Votes"}
-	yB={"2020 Early Votes"}
-/>
-<GraphicTitle
-   title={"Pie Chart"}
-/>
-<PieChart
-	width={height}
-	height={height}
-	data={testData.default}
-	xVar={"State"}
-	yVar={"2020 Early Votes"}
-	yA={"2016 Total Votes"}
-	yB={"2020 Early Votes"}
-/>
-<div class = "category-title">Maps</div>
-<MapUSA
-	data={cannabislaws.default}
-	width = {width}
-	height = {height * 2}
-	variable={"combined"}
-	maptype={"geo"}
-/>
-<div class = "category-title">Networks</div>
-
-</main>
-
-<!--
-
-<BarChart
-	data={turnout.default.filter(d => (["Massachusetts", "Rhode Island", "Connecticut", "New Hampshire", "Maine", "Vermont"].indexOf(d["State"]) > -1))}
-	width={width}
-	height={height}
-	xVar={"State"}
-	yVar={["2020 Early Votes"]}
-	yDomain={[0, 3500000]}
-	orientation={getorientation(width)}
-/>
-
-
-
-
-
-
-<hr />
-
-
-<GraphicTitle
-	title={"Transportation mode usage changes in March 2020"}
-/>
-
-
-<hr />
-
-
-
-
-
-
-
-<hr />
-
-
-
-
-<hr />
-
-
-
- -->
-
-
-<!-- <GraphicTitle
-	title={"Waffle"}
-/>
-
-
-
-<hr />
-
-
-
-<GraphicTitle
-	title={"2020 Vs. 2016 Votes"}
-/>
-
-
-
-<hr />
- -->
-
-<GraphicFooter
-	source={'<a href="https://electproject.github.io/Early-Vote-2020G/index.html">United States Elections Project</a>'}
-	note={'Accessed Nov 2020'}
-	credit={'Developer Credit/Northeastern University'}
-/>
+<!-- </main> -->
