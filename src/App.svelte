@@ -51,32 +51,32 @@ export const locations = [
   { id: 1,
 	  name: 'Larger than Life 2020',
 	  description: 'Come by Centennial Common to take your photo with the 20’ high ‘2020’ to mark this moment!',
-  x: 850,
-  y: 655
+	  x: 680,
+	  y: 1400,
 },
   {  id: 2,
 	  name: 'Easy Being Green',
 		description: 'The Sculpture Garden holds a peaceful spot for a very green photo backdrop for photos of you and your loved ones.',
-	  x: 200,
-	  y: 500
+		x: 1628,
+             y: 1333,
   },
   { id: 3,
 	  name: 'Blowing in the Wind',
 	  description: 'Krentzman Quad holds a great collection of pinwheels for fun photos!',
-	  x: 760,
-	  y: 550
+	  x: 1580,
+             y: 784
   },
   {  id: 4,
 	  name: 'You’re So Fancy!',
     description: 'Bright red sequins as a flashy background for you and friends at base of walking bridge between Snell and Egan!',
-	  x:500,
-	  y: 600
+	x: 1290,
+		   y: 1323
   },
   { id: 5,
 	  name: 'N2020',
     description: 'Doesn’t matter what direction you’re headed in, stop by Snell Quad for a great N2020 photo op!',
-	   x: 294,
-	   y: 286
+	x: 1454,
+	y: 1211
    }
 ];
 
@@ -86,8 +86,18 @@ onMount(() => {
 
 	let mapWrapper = document.querySelector('.map-wrapper');
 
+	let activeMarker = document.querySelector('.marker')
+	console.log(activeMarker)
+
+	let allMarkers = document.querySelectorAll('.marker')
+	console.log(allMarkers)
 
 	let locationInfo = document.querySelector('.nu-map-location-info');
+	console.log(locationInfo)
+	//
+	// let info =  document.querySelectorAll('.nu-map-location-info');
+	// console.log(info)
+	// console.log( document.querySelectorAll('.nu-map-location-info'))
 	let locationInfoTitle = document.querySelector('.nu-map-location-title');
 	let locationInfoText = document.querySelector('.nu-map-location-text');
 	let locationInfoToggle = document.querySelector('.nu-map-location-info__toggle');
@@ -126,14 +136,39 @@ onMount(() => {
         // canvasElement.height = mapWrapper.clientHeight;
         // canvasElement.width = mapWrapper.clientWidth;
 
+
+	// activeMarker.classList.remove('is-active');
+
         activateLocation(activeLocation);
 
         nextButton.addEventListener('click', () => {
             activateLocation(activeLocation + 1);
+			// 	if (activeMarker.classList.contains('is-active')) {
+			// 		activeMarker.classList.remove('is-active');
+			// 	} else {
+			// 	// allMarkers.forEach.call(function(el) {
+			// 	// el.classList.remove("is-active");
+			// 	// });
+			// 	activeMarker.classList.add('is-active');
+			// }
+			if (activeMarker.classList.contains('is-active')) {
+				activeMarker.classList.remove('is-active');
+			} else {
+				activeMarker.classList.add('is-active');
+			}
+
+
         });
 
         prevButton.addEventListener('click', () => {
             activateLocation(activeLocation - 1);
+			// activeMarker.classList.add('is-active');
+			if (activeMarker.classList.contains('is-active')) {
+				activeMarker.classList.remove('is-active');
+			} else {
+				activeMarker.classList.add('is-active');
+			}
+
         });
 
         document.addEventListener('keyup', (event) => {
@@ -148,6 +183,15 @@ onMount(() => {
         })
 
         locationInfoToggle.addEventListener('click', () => {
+		// 	if (activeMarker.classList.contains('is-active')) {
+		// 		// activeMarker.classList.remove('is-active');
+		// 	} else {
+		// 		allMarkers.forEach.call(function(el) {
+		// 	el.classList.remove("is-active");
+		// 	});
+		// 	activeMarker.classList.add('is-active');
+		// }
+
             if (locationInfo.classList.contains('is-active')) {
                 locationInfo.classList.remove('is-active');
             } else {
@@ -156,6 +200,7 @@ onMount(() => {
         });
 
         locationInfoTitle.addEventListener('click', () => {
+
             if (locationInfo.classList.contains('is-active')) {
                 locationInfo.classList.remove('is-active');
             } else {
