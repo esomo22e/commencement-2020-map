@@ -77,7 +77,7 @@ export const locations = [
     description: 'Doesn’t matter what direction you’re headed in, stop by Snell Quad for a great N2020 photo op!',
 	   x: 294,
 	   y: 286
-   },
+   }
 ];
 
 
@@ -618,21 +618,19 @@ main{
 	height: 768px; */
 
 }
+.map-graphic {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 3060px;
+        height: 2031px;
+        transition: top 2s ease 0s, left 2s ease 0s
+    }
 
-.map-graphic{
-	position:absolute;
-	top: 0;
-left: 0;
-	width: 1024px;
-	height: 800px;
-	transition: top 2s ease 0s, left 2s ease 0s
-}
-
-image.commencement-map{
-	width: 1024px;
-	height:768px;
-
-}
+    image.commencement-map {
+        width: 3060px;
+        height: 2031px;
+    }
 
 
 .marker{
