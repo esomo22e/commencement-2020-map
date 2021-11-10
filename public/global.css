@@ -26,3 +26,23 @@ body.dev-index footer {
 	background-color: black;
 	height:400px;
 }
+
+/* TODO: Missing media query for large viewport */
+   @media only screen and (min-width: 1008px) {
+	   :root {
+		   --nu-map-button-icon--size: 36px;
+		   --nu-map-navigation--width: var(--nu-map-location-info--width);
+	   }
+	   .nu-map-location-info {
+		   border-radius: 0 0 0 var(--global--border-radius-regular);
+		   right: 0;
+		   top: calc(var(--global--spacing-medium) + var(--nu-map-button-icon--size));
+	   }
+	   .nu-map-location-info__toggle {
+		   display: none;
+	   }
+	   .nu-map-location-title {
+		   padding: 0 var(--global--spacing-medium);
+		   text-align: center;
+	   }
+   }
