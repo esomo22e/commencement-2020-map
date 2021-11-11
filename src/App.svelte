@@ -53,30 +53,39 @@ export const locations = [
 	  description: 'Come by Centennial Common to take your photo with the 20’ high ‘2020’ to mark this moment!',
 	  x: 680,
 	  y: 1400,
+	  image:'2020_red'
 },
   {  id: 2,
 	  name: 'Easy Being Green',
 		description: 'The Sculpture Garden holds a peaceful spot for a very green photo backdrop for photos of you and your loved ones.',
 		x: 1628,
              y: 1333,
+			 image:'green'
+
   },
   { id: 3,
 	  name: 'Blowing in the Wind',
 	  description: 'Krentzman Quad holds a great collection of pinwheels for fun photos!',
 	  x: 1580,
-             y: 784
+             y: 784,
+			 image:'pinwheel'
+
   },
   {  id: 4,
 	  name: 'You’re So Fancy!',
     description: 'Bright red sequins as a flashy background for you and friends at base of walking bridge between Snell and Egan!',
 	x: 1290,
-		   y: 1323
+		   y: 1323,
+		   image:'red_ball'
+
   },
   { id: 5,
 	  name: 'N2020',
     description: 'Doesn’t matter what direction you’re headed in, stop by Snell Quad for a great N2020 photo op!',
 	x: 1454,
-	y: 1211
+	y: 1211,
+	image:'northeastern'
+
    }
 ];
 
@@ -677,7 +686,8 @@ main{
    background-repeat: no-repeat;
      background-position: center; /* Center the image */
 background-size: 40px;
-background-color: #E5D4AB;
+background-color:#eff1f3;
+/* background-color: #E5D4AB; */
 /* background-image: url("//news.northeastern.edu/interactive/2021/05/commencement-map-2021/photos/1.jpg"); */
 /* <img src="https://img.icons8.com/ios/50/000000/building.png"/> */
 /* transform: translate(-50%, -50%) translate(-68px, 191px) rotateX(0deg) rotateZ(0deg); */
@@ -794,7 +804,7 @@ background-color: #E5D4AB;
  <foreignObject x="{location.x}" y="{location.y}" width="80" height="80" class = "foreign-marker">
 
    <!-- <span class = "marker" id = "mark-location" style="background-image: url('//news.northeastern.edu/interactive/2021/10/commencement-2021/images/icon_1.png')" xmlns="http://www.w3.org/1999/xhtml"></span> -->
-   <span class = "marker" id = "mark-location" style="background-image:url('//news.northeastern.edu/interactive/2021/10/commencement-2021/images/icon_{location.id}.png" xmlns="http://www.w3.org/1999/xhtml"></span>
+   <span class = "marker" id = "mark-location" style="background-image:url('//news.northeastern.edu/interactive/2021/10/commencement-2021/images/{location.image}.png" xmlns="http://www.w3.org/1999/xhtml"></span>
 
 
 
