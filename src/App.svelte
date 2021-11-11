@@ -23,7 +23,7 @@
 
 	export let width = Math.min(
 
-		document.getElementById('svelte-commencement-2021').getBoundingClientRect().width,
+		document.getElementById('svelte-commencement-2020').getBoundingClientRect().width,
 		1100
 	);
 
@@ -39,7 +39,7 @@
 		}
 	}
 
-	let src_images = "http://news.northeastern.edu/interactive/2021/10/commencement-2021/images/map_northeastern.svg";
+	let src_images = "http://news.northeastern.edu/interactive/2021/10/commencement-2020/images/map_northeastern.svg";
 
 	// export let lat;
 	// export let long;
@@ -803,8 +803,8 @@ background-color:#eff1f3;
  <!-- Common use case: embed HTML text into SVG -->
  <foreignObject x="{location.x}" y="{location.y}" width="80" height="80" class = "foreign-marker">
 
-   <!-- <span class = "marker" id = "mark-location" style="background-image: url('//news.northeastern.edu/interactive/2021/10/commencement-2021/images/icon_1.png')" xmlns="http://www.w3.org/1999/xhtml"></span> -->
-   <span class = "marker" id = "mark-location" style="background-image:url('//news.northeastern.edu/interactive/2021/10/commencement-2021/images/{location.image}.png" xmlns="http://www.w3.org/1999/xhtml"></span>
+   <!-- <span class = "marker" id = "mark-location" style="background-image: url('//news.northeastern.edu/interactive/2021/10/commencement-2020/images/icon_1.png')" xmlns="http://www.w3.org/1999/xhtml"></span> -->
+   <span class = "marker" id = "mark-location" style="background-image:url('//news.northeastern.edu/interactive/2021/10/commencement-2020/images/{location.image}.png" xmlns="http://www.w3.org/1999/xhtml"></span>
 
 
 

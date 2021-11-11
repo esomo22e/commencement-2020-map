@@ -1,7 +1,7 @@
 import App from './App.svelte';
 
 const app = new App({
-	target: document.getElementById('svelte-commencement-2021')
+	target: document.getElementById('svelte-commencement-2020')
 });
 
 export default app;
