@@ -38,7 +38,7 @@
         }
     }
 
-    let src_images = "http://news.northeastern.edu/interactive/2021/10/commencement-2020/images/map_northeastern.svg";
+    let src_images = "http://news.northeastern.edu/interactive/commencement-photo-ops-2020/images/map_northeastern.svg";
 
     // export let lat;
     // export let long;
@@ -789,7 +789,7 @@
 
                 <!-- <span class = "marker" id = "mark-location" style="background-image: url('//news.northeastern.edu/interactive/2021/10/commencement-2020/images/icon_1.png')" xmlns="http://www.w3.org/1999/xhtml"></span> -->
                 <span class="marker" id="mark-location"
-                      style="background-image:url('//news.northeastern.edu/interactive/2021/10/commencement-2020/images/{location.image}.png"
+                      style="background-image:url('//news.northeastern.edu/interactive/commencement-photo-ops-2020/images/{location.image}.png"
                       xmlns="http://www.w3.org/1999/xhtml"></span>
 
 
