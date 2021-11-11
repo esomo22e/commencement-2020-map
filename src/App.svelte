@@ -124,43 +124,31 @@
         let _particles = [];
         let activeLocation = 0;
         let tl = gsap.timeline({ease: Power2.in});
-
         let wrapperBounds = document.querySelector('.map-wrapper').getBoundingClientRect();
         let graphicBounds = document.querySelector('.map-graphic').getBoundingClientRect();
-
         let wrapperWidth = wrapperBounds.width;
         let wrapperHeight = wrapperBounds.height;
         let wrapperLocation = [wrapperBounds.top, wrapperBounds.left, wrapperBounds.bottom, wrapperBounds.right]
-
-
         let graphicWidth = graphicBounds.width;
         let graphicHeight = graphicBounds.height;
         let graphicOffset = [graphicBounds.x, graphicBounds.y]
 
 
-// let tl = gsap.timeline({ease: Power2.in});
-
-
         init();
 
-// activeMarker.classList.remove('is-active');
         function init() {
-            // canvasElement.height = mapWrapper.clientHeight;
-            // canvasElement.width = mapWrapper.clientWidth;
+            canvasElement.height = mapWrapper.clientHeight;
+            canvasElement.width = mapWrapper.clientWidth;
 
 
             activateLocation(activeLocation);
 
             nextButton.addEventListener('click', () => {
                 activateLocation(activeLocation + 1);
-                // activeMarker.classList.add('is-active');
-
             });
 
             prevButton.addEventListener('click', () => {
                 activateLocation(activeLocation - 1);
-                // activeMarker.classList.add('is-active');
-
             });
 
             document.addEventListener('keyup', (event) => {
@@ -175,23 +163,20 @@
             })
 
             locationInfoToggle.addEventListener('click', () => {
-
-
-                if (locationInfo.classList.contains('is-active')) {
-                    locationInfo.classList.remove('is-active');
-                } else {
-                    locationInfo.classList.add('is-active');
-                }
+                toggleInfoBar()
             });
 
             locationInfoTitle.addEventListener('click', () => {
-
-                if (locationInfo.classList.contains('is-active')) {
-                    locationInfo.classList.remove('is-active');
-                } else {
-                    locationInfo.classList.add('is-active');
-                }
+                toggleInfoBar()
             });
+        }
+
+        function toggleInfoBar() {
+            if (locationInfo.classList.contains('is-active')) {
+                locationInfo.classList.remove('is-active');
+            } else {
+                locationInfo.classList.add('is-active');
+            }
         }
 
         function activateLocation(index) {
@@ -582,6 +567,7 @@
         position: absolute;
         top: 0;
         width: 42px;
+        z-index: 1;
     }
 
     .nu-map-location-info__toggle-icon {
@@ -631,12 +617,15 @@
     .pin {
         opacity: 0.6;
         filter: saturate(0%);
-        transition: filter 300ms ease;
+        transition: filter 300ms ease, transform 300ms ease;
+        /*transform: scale(0.86);*/
+        transform-origin: bottom;
     }
 
     .pin.is-active {
         opacity: 1;
         filter: saturate(100%);
+        /*transform: scale(1);*/
     }
 
     .map-wrapper {
