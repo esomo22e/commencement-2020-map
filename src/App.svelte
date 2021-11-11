@@ -711,6 +711,8 @@ background-color: #E5D4AB;
 }
 
 @media only screen and (max-width: 1007px) {
+
+
   :root {
     --nu-map-button-icon--size: 50px;
     --nu-map-navigation--width: 180px;
@@ -722,6 +724,10 @@ background-color: #E5D4AB;
     transition: bottom 300ms ease-out;
   }
 
+
+	.nu-map-button{
+		padding: 0;
+	}
   .nu-map-location-info.is-active {
     bottom: 0;
 }
