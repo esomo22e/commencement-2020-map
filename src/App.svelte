@@ -38,7 +38,7 @@
         }
     }
 
-    let src_images = "http://news.northeastern.edu/interactive/commencement-photo-ops-2020/images/map_northeastern.svg";
+    let src_images = "//news.northeastern.edu/interactive/commencement-photo-ops-2020/images/map_northeastern.svg";
 
     // export let lat;
     // export let long;
@@ -50,7 +50,7 @@
         {
             slug: 'larger-than-life-2020',
             name: 'Larger than Life 2020',
-            description: 'Come by Centennial Common to take your photo with the 20’ high ‘2020’ to mark this moment!',
+            description: 'At Centennial Common, there will be a 20-foot-high “2020.”',
             x: 680,
             y: 1400,
             image: '2020_red'
@@ -58,7 +58,7 @@
         {
             slug: 'easy-being-green',
             name: 'Easy Being Green',
-            description: 'The Sculpture Garden holds a peaceful spot for a very green photo backdrop for photos of you and your loved ones.',
+            description: 'The Sculpture Garden is a peaceful location for a very green backdrop.',
             x: 1628,
             y: 1333,
             image: 'green'
@@ -67,7 +67,7 @@
         {
             slug: 'blowing-in-the-wind',
             name: 'Blowing in the Wind',
-            description: 'Krentzman Quad holds a great collection of pinwheels for fun photos!',
+            description: 'Krentzman Quad holds a great collection of pinwheels, highlighting energy and motion.',
             x: 1580,
             y: 784,
             image: 'pinwheel'
@@ -76,7 +76,7 @@
         {
             slug: 'youre-so-fancy',
             name: 'You’re So Fancy!',
-            description: 'Bright red sequins as a flashy background for you and friends at base of walking bridge between Snell and Egan!',
+            description: 'Bright red sequins will form a flashy background at the base of the walking bridge between Snell and Egan.',
             x: 1290,
             y: 1323,
             image: 'red_ball'
@@ -85,7 +85,7 @@
         {
             slug: 'n2020',
             name: 'N2020',
-            description: 'Doesn’t matter what direction you’re headed in, stop by Snell Quad for a great N2020 photo op!',
+            description: 'Whatever direction you’re headed in, swing by Snell Quad for a great N2020 photo op.',
             x: 1454,
             y: 1211,
             image: 'northeastern'
@@ -526,6 +526,7 @@
         height: var(--nu-map-button--size);
         justify-content: center;
         line-height: 1;
+        margin-bottom: 0;
         right: 0;
         text-align: center;
         user-select: none;
@@ -548,8 +549,10 @@
         font-family: var(--global--font-small);
         font-size: var(--global--font-size-s);
         box-sizing: border-box;
+        margin-bottom: 0;
         position: absolute;
         overflow: hidden;
+        border: var(--global--color-dark-gray) 1px solid;
         background-color: var(--nu-map--color--lighter-gray);
         padding: 0;
         height: var(--nu-map-location-info--height);
@@ -580,7 +583,7 @@
     .nu-map-location-title {
         cursor: pointer;
         font-family: var(--global--font-display-impact);
-        font-size: var(--global--font-size-s);
+        font-size: var(--global--font-size-xxl);
         font-weight: var(--global--font-weight-ultra-black);
         line-height: var(--nu-map-location--header--height);
         margin-top: 0;
@@ -590,7 +593,7 @@
     }
 
     .nu-map-location-text {
-        padding: 0 var(--global--spacing-small) var(--global--spacing-small);
+        padding: var(--global--spacing-small);
     }
 
     #nu-map-effects {
@@ -618,26 +621,29 @@
         opacity: 0.6;
         filter: saturate(0%);
         transition: filter 300ms ease, transform 300ms ease;
-        /*transform: scale(0.86);*/
         transform-origin: bottom;
     }
 
     .pin.is-active {
         opacity: 1;
         filter: saturate(100%);
-        /*transform: scale(1);*/
+    }
+
+    .pin.is-active .marker {
+        border-color: var(--global--color-red);
+    }
+    .pin.is-active .marker::after {
+        border-color: var(--global--color-red) transparent transparent transparent;
     }
 
     .map-wrapper {
         overflow: hidden;
         position: relative;
-        /* width: 100vw; */
-        width: 1024px;
+        max-width: 1024px;
         height: 600px;
-
-        /* width: 1024px;
-        height: 768px; */
-
+        width: 100%;
+        border: var(--global--color-light-gray) 1px solid;
+        border-radius: var(--global--border-radius-regular);
     }
 
     .map-graphic {
@@ -655,30 +661,23 @@
     }
 
 
+    .marker, .marker::after {
+        transition: border-color 300ms ease;
+    }
+
     .marker {
-
-
-        /* background-image: url("https://img.icons8.com/ios/50/000000/building.png"); */
         background-repeat: no-repeat;
         background-position: center; /* Center the image */
         background-size: 40px;
         background-color: #eff1f3;
-        /* background-color: #E5D4AB; */
-        /* background-image: url("//news.northeastern.edu/interactive/2021/05/commencement-map-2021/photos/1.jpg"); */
-        /* <img src="https://img.icons8.com/ios/50/000000/building.png"/> */
-        /* transform: translate(-50%, -50%) translate(-68px, 191px) rotateX(0deg) rotateZ(0deg); */
-        /* background-size: cover; */
         border: 4px solid black;
         width: 70px;
         height: 70px;
         border-radius: 50%;
         cursor: pointer;
         position: absolute;
-        /* top: 0; */
         top: 0;
         left: 0;
-        /* top: 25%;
-        left: 25%; */
         will-change: transform;
         z-index: 1;
     }
@@ -706,8 +705,8 @@
 
         .nu-map-location-info {
             bottom: calc(-1 * var(--nu-map-location-info--height) + var(--nu-map-location--header--height));
-            left: calc(50% - 0.5 * var(--nu-map-location-info--width));
             border-radius: var(--global--border-radius-regular) var(--global--border-radius-regular) 0 0;
+            left: calc(50% - 0.5 * var(--nu-map-location-info--width));
             transition: bottom 300ms ease-out;
         }
 
@@ -743,7 +742,6 @@
         }
     }
 
-    /* TODO: Missing media query for large viewport */
     @media only screen and (min-width: 1008px) {
         :root {
             --nu-map-button-icon--size: 36px;
@@ -753,7 +751,7 @@
         .nu-map-location-info {
             border-radius: 0 0 0 var(--global--border-radius-regular);
             right: 0;
-            top: calc(var(--global--spacing-medium) + var(--nu-map-button-icon--size));
+            top: calc(var(--global--spacing-medium) + var(--nu-map-button-icon--size) + 12px);
         }
 
         .nu-map-location-info__toggle {
@@ -768,11 +766,6 @@
 
 
 </style>
-<!-- <main> -->
-
-<div class="category-title">Commencement 2020 Map</div>
-
-
 <div class="map-wrapper">
 
     <svg class="map-graphic" id="graphic"
@@ -780,26 +773,18 @@
 
         <image class="commencement-map" href={src_images}/>
         {#each locations as location}
-
-
             <!-- Common use case: embed HTML text into SVG -->
             <foreignObject x="{location.x}" y="{location.y}" width="80"
                            height="80" class="pin is-active"
                            id="{location.slug}">
-
                 <!-- <span class = "marker" id = "mark-location" style="background-image: url('//news.northeastern.edu/interactive/2021/10/commencement-2020/images/icon_1.png')" xmlns="http://www.w3.org/1999/xhtml"></span> -->
                 <span class="marker" id="mark-location"
                       style="background-image:url('//news.northeastern.edu/interactive/commencement-photo-ops-2020/images/{location.image}.png"
                       xmlns="http://www.w3.org/1999/xhtml"></span>
-
-
             </foreignObject>
 
         {/each}
-
-
     </svg>
-
     <div class="nu-map-navigation-wrapper">
         <canvas id="nu-map-effects"></canvas>
         <menu class="nu-map-navigation">
