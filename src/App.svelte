@@ -131,43 +131,32 @@ onMount(() => {
 
 
     init();
-
+	[].forEach.call(allMarkers, function(el) {
+// el.classList.remove("is-active");
+ el.classList.add("is-active");
+});
+// activeMarker.classList.remove('is-active');
     function init() {
         // canvasElement.height = mapWrapper.clientHeight;
         // canvasElement.width = mapWrapper.clientWidth;
 
-
-	// activeMarker.classList.remove('is-active');
+		[].forEach.call(allMarkers, function(el) {
+	// el.classList.remove("is-active");
+	 el.classList.remove("is-active");
+	});
+	activeMarker.classList.add('is-active');
 
         activateLocation(activeLocation);
 
         nextButton.addEventListener('click', () => {
             activateLocation(activeLocation + 1);
-			// 	if (activeMarker.classList.contains('is-active')) {
-			// 		activeMarker.classList.remove('is-active');
-			// 	} else {
-			// 	// allMarkers.forEach.call(function(el) {
-			// 	// el.classList.remove("is-active");
-			// 	// });
-			// 	activeMarker.classList.add('is-active');
-			// }
-			if (activeMarker.classList.contains('is-active')) {
-				activeMarker.classList.remove('is-active');
-			} else {
-				activeMarker.classList.add('is-active');
-			}
-
+			// activeMarker.classList.add('is-active');
 
         });
 
         prevButton.addEventListener('click', () => {
             activateLocation(activeLocation - 1);
 			// activeMarker.classList.add('is-active');
-			if (activeMarker.classList.contains('is-active')) {
-				activeMarker.classList.remove('is-active');
-			} else {
-				activeMarker.classList.add('is-active');
-			}
 
         });
 
@@ -184,11 +173,9 @@ onMount(() => {
 
         locationInfoToggle.addEventListener('click', () => {
 		// 	if (activeMarker.classList.contains('is-active')) {
-		// 		// activeMarker.classList.remove('is-active');
+		// 		activeMarker.classList.remove('is-active');
 		// 	} else {
-		// 		allMarkers.forEach.call(function(el) {
-		// 	el.classList.remove("is-active");
-		// 	});
+		//
 		// 	activeMarker.classList.add('is-active');
 		// }
 
@@ -200,6 +187,11 @@ onMount(() => {
         });
 
         locationInfoTitle.addEventListener('click', () => {
+			// if (activeMarker.classList.contains('is-active')) {
+			// 	activeMarker.classList.remove('is-active');
+			// } else {
+			// 	activeMarker.classList.add('is-active');
+			// }
 
             if (locationInfo.classList.contains('is-active')) {
                 locationInfo.classList.remove('is-active');
