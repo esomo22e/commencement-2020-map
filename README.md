@@ -153,3 +153,4 @@ This is a way of building an SVG-type waffle chart using D3; however, I don't th
 
 - wrapLabel.js: a function to wrap long axis labels in D3 charts to multiple lines, similar to [this pattern](https://bl.ocks.org/mbostock/7555321).
 # commencement-2021
+# commencement-2020-map
